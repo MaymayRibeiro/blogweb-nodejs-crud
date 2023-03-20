@@ -1,0 +1,21 @@
+<!--Essa view se parece muito com a new, mudamos poucos dados-->
+<%- include ('./../../partials/header.ejs') %>
+<%- include ('./../../partials/navbar.ejs') %>
+
+<div class="container">
+    <hr>
+    <div class="card"> 
+        <div class="card-header">
+            <h2>Edição de categoria</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/categories/update">
+                <input class="form-control" type="text" name="title" placeholder= "" value="<%= category.title %>"><br> <!--value = carregar o valor do formulário dinamicamente-->
+                <input type="hidden" name="id" value="<%= category.id %>"> <!--armazena o id da categoria que vou atualizar-->
+                <button class="btn btn-success">Atualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ('./../../partials/footer.ejs') %>

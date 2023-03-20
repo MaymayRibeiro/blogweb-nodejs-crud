@@ -1,0 +1,39 @@
+<%- include ('./../../partials/header.ejs') %> <!--Importando o header-->
+<%- include ('./../../partials/navbar.ejs') %> <!--Importando a navbar-->
+
+<div class="container">
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h2>Novo Artigo</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" action="/articles/save"> <!--Dados necessários para criar a categoria-->
+                <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo"><br>
+                <textarea class="form-control" placeholder="Escreva o artigo aqui" name="body" id="article"></textarea><br>
+                <label>Categoria</label>
+                <select name="category" class="form-control"> <!--Name=acessar no backend-->
+                    <% categories.forEach((category)=>{ %>
+                        <option value="<%= category.id %>"><%= category.title %></option>
+                   <% }) %>
+                </select><br>
+                <button class="btn btn-info">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include ('./../../partials/footer.ejs') %> <!--Importando o footer-->
+
+<!--Carregar e instalar o TinyMCE para personalizar a Textarea-->
+<script src="/tinymce/tinymce.min.js"></script>
+
+<!--Configurar o TinyMCE-->
+<script>
+//selector=se refere a textarea específica
+    tinymce.init({
+        language: 'pt_BR',
+        selector:"#article",
+        plugins: [ 'advlist', 'autolink', 'link', 'image', 'lists', 'preview', 'searchreplace', 'wordcount', 'fullscreen', 'insertdatetime', 'media','save', 'table','emoticons']
+    })
+
+</script>

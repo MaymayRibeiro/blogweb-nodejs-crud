@@ -1,0 +1,47 @@
+<%- include ('./../../partials/header.ejs') %> <!--Importando o header-->
+<%- include ('./../../partials/navbar.ejs') %> <!--Importando a navbar-->
+
+<div class="container">
+    <hr>
+    <h2>Categorias</h2>
+    <a class="btn btn-info" href="/admin/categories/new">Criar nova categoria</a>
+    <hr>
+    <table class="table table-bordered"> <!--Configurando a exibição da tabela com bootstrap-->
+        <thead>
+            <tr> <!--Cada categoria será um TR-->
+                <th>Id</th> 
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% categories.forEach(category => { %> <!--Variável Category = cada categoria que vai passar dentro do loop-->
+                    <tr> <!--Para que os dados sejam dinâmicos com a variável category escrevo os dados que eu quero pegar dentro da tag de exibir variável do ejs -->
+                       <th><%= category.id %></th> 
+                       <th><%= category.title %></th>
+                       <th><%= category.slug %></th>
+                       <th>
+                        <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a> <!--Botão amarelo / linkar botões de edição / cada categoria tem um id diferente, dinamicamente-->
+                        <form method="post" action="/categories/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)"> <!--Esse estilo evita que o formulário se quebre (botões). This passa o elemento html que chama esse evento-->
+                            <input type="hidden" name="id" value="<%= category.id %>"> <!--Envio para o backend para deletar o id correto-->
+                            <button class="btn btn-danger">Deletar</button> <!--Botão vermelho-->
+                        </form>
+                    </th>
+                    </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include ('./../../partials/footer.ejs') %> <!--Importando o footer-->
+<!--a variável event chama o método preventDefault que impede a submissão de exclusão-->
+<!-- parâmetro event  -->
+<script>
+    function confirmarDelecao(event, form) {
+        event.preventDefault();
+        var decision = confirm("Você quer deletar essa categoria?");   //receber uma decisão do usuário
+        if (decision){
+            form.submit(); //submeter o formulário a exclusão
+        }
+    }
+</script>

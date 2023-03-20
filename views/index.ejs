@@ -1,0 +1,31 @@
+<!--Importando o header-->
+<%- include ('./partials/header.ejs') %>
+<%- include ('./partials/homenavbar.ejs') %>
+
+<body>
+    <div class="container">
+        <hr>
+        <div class="jumbotron" style="background-color:#CFD8DC;" >  <!--Formatação de Blogs-->
+            <h1 class="display-4">Blog Artigos Web</h1>
+            <p class="lead">Bem vindo!</p>
+            <hr class="my-4">
+            <p>Esse é um simples blog de uma programadora em aprendizagem</p>
+            <a class="btn btn-info btn-lg" href="#" role="button">Leia mais</a>
+          </div>
+        <hr>
+        <% articles.forEach(article => { %>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+                <div class="card-body">
+                    <a href="/<%= article.slug %>" class="btn btn-info">Ler artigo</a>
+                </div>
+            </div>
+            <br> 
+      <%  }) %>
+    </div>
+</body>
+
+<!--Importando o footer-->
+<%- include ('./partials/footer.ejs') %>
